@@ -1,5 +1,7 @@
 <template>
-  <img src="./assets/logo.png">
+  <img src="./assets/logo.png" />
+  <font-awesome-icon icon="user-secret" />
+  <font-awesome-icon icon="ad" />
   <div>
     <p>
       If Element Plus is successfully added to this project, you'll see an
@@ -8,18 +10,18 @@
     </p>
     <el-button type="primary">el-button</el-button>
   </div>
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HelloWorld msg="Welcome to Your Vue.js App" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     HelloWorld
   }
-}
+};
 </script>
 
 <style>
