@@ -1,0 +1,79 @@
+//清除html自带样式，格式化初始样式
+html,
+body,
+div,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+ol,
+form,
+input,
+textarea,
+th,
+td,
+select {
+  margin: 0;
+  padding: 0;
+}
+// * {
+//   box-sizing: border-box;
+// }
+[v-cloak] {
+  display: none;
+}
+html,
+body,
+#app {
+  width: 100%;
+  min-height: 100%;
+  background: rgb(255, 255, 255);
+  font-family: "smallFont";
+}
+html {
+  height: 100%;
+}
+// body {
+//   color: #3a2220;
+// }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+ul,
+ol {
+  list-style: none;
+}
+img {
+  border: none;
+  vertical-align: middle;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+input,
+textarea {
+  outline: none;
+  border: none;
+}
+textarea {
+  resize: none;
+  overflow: auto;
+}

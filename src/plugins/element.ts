@@ -175,11 +175,11 @@ const plugins = [
 ];
 
 export default {
-  install: function(app: any) {
-    components.forEach(component => {
+  install: function (app: any) {
+    components.forEach((component) => {
       app.component(component.name, component);
     });
-    plugins.forEach(plugin => {
+    plugins.forEach((plugin) => {
       app.use(plugin);
     });
     app.provide("$loading", ElLoading.service);
