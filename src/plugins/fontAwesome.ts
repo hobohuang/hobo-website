@@ -11,5 +11,5 @@ components.forEach((item) => {
 export default {
   install: function (app: any) {
     app.component("font-awesome-icon", FontAwesomeIcon);
-  }
+  },
 };

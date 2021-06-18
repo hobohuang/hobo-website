@@ -1,12 +1,12 @@
 <template>
-  <div class="about">about</div>
+  <div class="blog-main">mian</div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "about",
+  name: "blogMain",
 });
 </script>
 

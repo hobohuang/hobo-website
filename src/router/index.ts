@@ -7,7 +7,11 @@ const Show = () => import("../views/show/Index.vue");
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "Home",
+    redirect: "/home",
+  },
+  {
+    path: "/home",
+    name: "home",
     component: Home,
   },
   {

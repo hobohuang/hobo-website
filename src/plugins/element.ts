@@ -82,7 +82,7 @@ import {
   ElLoading,
   ElMessage,
   ElMessageBox,
-  ElNotification
+  ElNotification,
 } from "element-plus";
 
 const components = [
@@ -163,7 +163,7 @@ const components = [
   ElTooltip,
   ElTransfer,
   ElTree,
-  ElUpload
+  ElUpload,
 ];
 
 const plugins = [
@@ -171,7 +171,7 @@ const plugins = [
   ElLoading,
   ElMessage,
   ElMessageBox,
-  ElNotification
+  ElNotification,
 ];
 
 export default {
@@ -191,8 +191,8 @@ export default {
     app.provide("$notify", ElNotification);
     const option = {
       size: "small",
-      zIndex: 2000
+      zIndex: 2000,
     };
     app.config.globalProperties.$ELEMENT = option;
-  }
+  },
 };

@@ -77,3 +77,7 @@ textarea {
   resize: none;
   overflow: auto;
 }
+//去除element nav下划线
+.el-menu.el-menu--horizontal {
+  border-bottom: none !important;
+}
