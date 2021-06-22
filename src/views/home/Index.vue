@@ -2,7 +2,7 @@
   <div class="home">
     <el-row type="flex" justify="space-between">
       <el-col :span="5">
-        <blog-aside-left class="grid-content bg-purple"></blog-aside-left>
+        <blog-aside-left />
       </el-col>
       <el-col :span="12">
         <blog-main class="grid-content bg-purple-light"></blog-main>

@@ -46,6 +46,7 @@ export default defineComponent({
 .top-nav {
   display: flex;
   border-bottom: 1px solid #dcdfe6;
+  background: #fff;
 }
 .logo-nav {
   height: 60px;

@@ -10,4 +10,10 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.blog-aside-right {
+  background: #fff;
+  height: 100%;
+  box-sizing: border-box;
+}
+</style>
