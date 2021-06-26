@@ -1,9 +1,9 @@
 //引入图标库
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faUserSecret, faAd } from "@fortawesome/free-solid-svg-icons";
+import { faUserSecret, faAd, faBlog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-const components = [faUserSecret, faAd];
+const components = [faUserSecret, faAd, faBlog];
 
 components.forEach((item) => {
   library.add(item);

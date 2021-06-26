@@ -1,33 +1,3 @@
-# hobo-website
-
-## Project setup
-
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
 # 页面层级
 
 ## 主页 /home
@@ -56,10 +26,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 类似于微博、朋友圈的功能，但是内容较短有图片数量和文字数量限制，不需要额外开发新页面跳转，直接在当前页面显示
 
-### —— 日志[二级导航]
+### —— 文章[二级导航]
 
 展示长文字多图片的内容，当前页面只展示简要内容和封面图片。
-日志和说说可以有相同标签的文章，他们之间不同就是字数在 200 以内的，图片 9 个以内的为说说，否则为日志。
+文章和说说可以有相同标签的文章，他们之间不同就是字数在 200 以内的，图片 9 个以内的为说说，否则为文章。
 
 ## 作品 /show[一级导航栏]
 
@@ -85,7 +55,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### —— 关于本站
 
-本站设立的目的，等等
+本站设立的目的，所用技术栈等等
 
 ### —— 关于我
 
@@ -94,3 +64,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### —— 联系我
 
 微信(需要权限)、手机号(需要权限)、QQ 号(需要权限)、微博、抖音、小红书、B 站等联系方式
+
+# todolist
+
+# issue
+
+每个页面设置最小宽度

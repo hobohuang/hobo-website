@@ -5,7 +5,6 @@
     </a>
     <el-menu
       :default-active="$route.path"
-      class="el-menu-demo"
       mode="horizontal"
       router
       @select="handleSelect"
@@ -26,7 +25,7 @@ export default defineComponent({
   name: "topNav",
   setup() {
     let activeIndex = ref("home");
-    const handleSelect = (key: number, keyPath: string[]) => {
+    const handleSelect = (key: string, keyPath: string[]) => {
       console.log(key, keyPath);
     };
     return {
@@ -57,5 +56,9 @@ export default defineComponent({
     height: 30px;
     padding: 0 15px;
   }
+}
+//去除element nav下划线
+.el-menu.el-menu--horizontal {
+  border-bottom: none !important;
 }
 </style>

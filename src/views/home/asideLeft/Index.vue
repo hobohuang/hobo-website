@@ -1,24 +1,51 @@
 <template>
   <div class="blog-aside-left">
-    <visit-card />
+    <h2 class="left-title">标签</h2>
+    <el-menu
+      :default-active="activeIndex"
+      mode="vertical"
+      @select="handleSelect"
+    >
+      <el-menu-item index="1">说说</el-menu-item>
+      <el-submenu index="2">
+        <template #title>文章</template>
+        <el-menu-item index="2-1">全部</el-menu-item>
+        <el-menu-item index="2-2">文章1</el-menu-item>
+        <el-menu-item index="2-3">文章2</el-menu-item>
+      </el-submenu>
+      <el-submenu index="3">
+        <template #title>笔记</template>
+        <el-menu-item index="3-1">全部</el-menu-item>
+        <el-menu-item index="3-2">笔记1</el-menu-item>
+        <el-menu-item index="3-3">笔记2</el-menu-item>
+      </el-submenu>
+    </el-menu>
   </div>
 </template>
 
 <script lang="ts">
-import visitCard from "./visitCard.vue";
-import { defineComponent } from "vue";
-
+import { defineComponent, ref } from "vue";
 export default defineComponent({
-  name: "blogAsideLeft",
-  components: {
-    visitCard,
+  name: "BlogAsideLeft",
+  setup() {
+    const activeIndex = ref("1");
+    const activeIndex2 = ref("1");
+    const handleSelect = (key: string, keyPath: string[]) => {
+      console.log(key, keyPath);
+    };
+    return {
+      activeIndex,
+      activeIndex2,
+      handleSelect,
+    };
   },
 });
 </script>
-
-<style lang="scss">
+<style lang="scss" scoped>
 .blog-aside-left {
-  height: 100%;
-  box-sizing: border-box;
+  background: #fff;
+  .left-title {
+    padding: 10px 16px;
+  }
 }
 </style>

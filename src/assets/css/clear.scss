@@ -77,11 +77,16 @@ textarea {
   resize: none;
   overflow: auto;
 }
-//去除element nav下划线
-.el-menu.el-menu--horizontal {
-  border-bottom: none !important;
-}
+
 //更改card的padding
 .el-card__body {
   padding: 15px !important;
+}
+.el-row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.el-submenu .el-menu-item {
+  padding: 0 45px;
+  min-width: 100px !important;
 }

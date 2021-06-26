@@ -30,6 +30,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.visit-card {
+  margin-top: 10px;
+}
 .head-card {
   width: 100%;
   border-radius: 50%;

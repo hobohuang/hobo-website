@@ -1,13 +1,7 @@
 <template>
   <div class="app">
     <top-nav />
-    <el-row type="flex" justify="space-between">
-      <el-col :span="2"></el-col>
-      <el-col :span="20">
-        <router-view />
-      </el-col>
-      <el-col :span="2"></el-col>
-    </el-row>
+    <router-view />
   </div>
 </template>
 
@@ -25,6 +19,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .app {
   background: #f5f5f5;
-  height: 100vh;
+  min-height: 100vh;
 }
 </style>
