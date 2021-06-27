@@ -1,2 +1,7 @@
 //全局样式文件
 @import "./clear.scss";
+
+// blog -> main -> blogContent -> ContentItem.vue
+.talk-item .el-card__header {
+  padding: 5px 15px !important;
+}

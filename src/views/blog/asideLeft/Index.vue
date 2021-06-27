@@ -1,6 +1,6 @@
 <template>
   <div class="blog-aside-left">
-    <h2 class="left-title">标签</h2>
+    <h2 class="left-title">分类</h2>
     <el-menu
       :default-active="activeIndex"
       mode="vertical"
