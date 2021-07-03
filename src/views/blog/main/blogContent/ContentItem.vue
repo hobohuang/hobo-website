@@ -18,16 +18,22 @@
     <div class="talk-article">测试</div>
     <footer class="talk-footer">
       <div class="footer-tool-item">
-        <font-awesome-icon icon="eye" class="tool-icon" />
-        <span>人数</span>
+        <el-button type="text">
+          <font-awesome-icon icon="eye" class="tool-icon" />
+          <span>人数</span>
+        </el-button>
       </div>
       <div class="footer-tool-item">
-        <font-awesome-icon icon="comment-dots" class="tool-icon" />
-        <span>评论</span>
+        <el-button type="text">
+          <font-awesome-icon icon="comment-dots" class="tool-icon" />
+          <span>评论</span>
+        </el-button>
       </div>
       <div class="footer-tool-item">
-        <font-awesome-icon icon="heart" class="tool-icon" />
-        <span>喜欢</span>
+        <el-button type="text">
+          <font-awesome-icon icon="heart" class="tool-icon" />
+          <span>喜欢</span>
+        </el-button>
       </div>
     </footer>
   </el-card>
@@ -90,7 +96,6 @@ export default defineComponent({
       line-height: 40px;
       text-align: center;
       font-size: 12px;
-      color: #939393;
 
       .tool-icon {
         margin-right: 5px;

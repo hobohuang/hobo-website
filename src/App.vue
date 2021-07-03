@@ -1,17 +1,23 @@
 <template>
   <div class="app">
+    <!-- 唤醒el-drawer放入Vux中 -->
     <top-nav />
     <router-view />
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import topNav from "./components/TopNav.vue";
 export default defineComponent({
   name: "app",
   components: {
     topNav,
+  },
+  setup() {
+    return {
+      drawer: ref(false),
+    };
   },
 });
 </script>

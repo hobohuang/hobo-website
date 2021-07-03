@@ -4,10 +4,10 @@
       <el-col :span="4">
         <blog-aside-left></blog-aside-left>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="14">
         <blog-main></blog-main>
       </el-col>
-      <el-col :span="5">
+      <el-col :span="6">
         <blog-aside-right></blog-aside-right>
       </el-col>
     </el-row>
@@ -32,7 +32,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .home {
-  margin: 20px 0;
+  margin: 20px auto;
+  max-width: 1122px;
 }
 .el-row {
   margin-bottom: 20px;

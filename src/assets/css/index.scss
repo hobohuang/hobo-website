@@ -5,3 +5,10 @@
 .talk-item .el-card__header {
   padding: 5px 15px !important;
 }
+
+.footer-tool-item .el-button--text {
+  color: #939393 !important;
+}
+.footer-tool-item:hover .el-button--text {
+  color: #409eff !important;
+}
