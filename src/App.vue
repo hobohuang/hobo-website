@@ -1,7 +1,7 @@
 <template>
   <div class="app">
-    <!-- 唤醒el-drawer放入Vux中 -->
     <top-nav />
+    <music-player />
     <router-view />
   </div>
 </template>
@@ -9,10 +9,12 @@
 <script>
 import { defineComponent, ref } from "vue";
 import topNav from "./components/TopNav.vue";
+import MusicPlayer from "./components/music/MusicPlayer.vue";
 export default defineComponent({
   name: "app",
   components: {
     topNav,
+    MusicPlayer,
   },
   setup() {
     return {
