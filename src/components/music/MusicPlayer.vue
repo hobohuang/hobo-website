@@ -1,27 +1,53 @@
 <!--  -->
 <template>
-  <div class="music-player">
+  <div
+    class="music-player"
+    @mouseenter="showMusicTool"
+    @mouseleave="showMusicInfo"
+  >
     <img src="../../assets/headPic.png" class="music-pic" />
-    <div class="music-info" v-show="false">
+    <div class="music-info" v-show="isShowMusicInfo">
       <span class="song">歌曲名</span>
       <span class="singer">演唱者</span>
     </div>
-    <ul class="option-tool" v-show="true">
-      <li class="like">
-        <font-awesome-icon icon="heart" class="tool-icon" />
+    <ul class="option-tool" v-show="!isShowMusicInfo">
+      <li class="vloume">
+        <font-awesome-icon :icon="['fa', 'volume-up']" />
       </li>
-      <li class="last">左</li>
-      <li class="play">播放</li>
-      <li class="next">右</li>
-      <li class="music-list">列表</li>
+      <li class="last">
+        <font-awesome-icon :icon="['fa', 'step-backward']" />
+      </li>
+      <li class="play">
+        <font-awesome-icon :icon="['fa', 'play-circle']" />
+      </li>
+      <li class="next">
+        <font-awesome-icon :icon="['fa', 'step-forward']" />
+      </li>
+      <li class="music-list">
+        <font-awesome-icon :icon="['fa', 'list']" />
+      </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 export default defineComponent({
   name: "musicPlayer",
+  setup() {
+    let isShowMusicInfo = ref(true);
+    const showMusicTool = () => {
+      isShowMusicInfo.value = false;
+    };
+    const showMusicInfo = () => {
+      isShowMusicInfo.value = true;
+    };
+    return {
+      isShowMusicInfo,
+      showMusicTool,
+      showMusicInfo,
+    };
+  },
 });
 </script>
 <style lang="scss" scoped>
@@ -79,9 +105,15 @@ export default defineComponent({
 
     li {
       margin: 5px;
+      font-size: 18px;
     }
-    .like {
-      color: #ff6a6a;
+    .play {
+      color: #1ed1a6;
+      font-size: 28px;
+    }
+    .vloume,
+    .music-list {
+      font-size: 14px;
     }
   }
 }
