@@ -11,14 +11,25 @@
       <span class="singer">演唱者</span>
     </div>
     <ul class="option-tool" v-show="!isShowMusicInfo">
-      <li class="vloume">
-        <font-awesome-icon :icon="['fa', 'volume-up']" />
+      <li class="vloume" @click="banOrPlayVolume">
+        <el-popover
+          placement="bottom"
+          :width="200"
+          :offset="30"
+          :hide-after="500"
+          trigger="hover"
+        >
+          <template #reference>
+            <font-awesome-icon :icon="['fa', volumeIcon]" />
+          </template>
+          <el-slider v-model="volumeNumber" :disabled="!isVolume"></el-slider>
+        </el-popover>
       </li>
       <li class="last">
         <font-awesome-icon :icon="['fa', 'step-backward']" />
       </li>
-      <li class="play">
-        <font-awesome-icon :icon="['fa', 'play-circle']" />
+      <li class="play" @click="palyOrPause">
+        <font-awesome-icon :icon="['fa', playIcon]" />
       </li>
       <li class="next">
         <font-awesome-icon :icon="['fa', 'step-forward']" />
@@ -36,16 +47,57 @@ export default defineComponent({
   name: "musicPlayer",
   setup() {
     let isShowMusicInfo = ref(true);
+    let isPlay = ref(true);
+    let isVolume = ref(true);
+    let perVolumeNumber = ref(0);
+    let volumeNumber = ref(0);
+
     const showMusicTool = () => {
       isShowMusicInfo.value = false;
     };
     const showMusicInfo = () => {
       isShowMusicInfo.value = true;
     };
+    const palyOrPause = () => {
+      isPlay.value = !isPlay.value;
+    };
+    const banOrPlayVolume = () => {
+      isVolume.value = !isVolume.value;
+      if (!isVolume.value) {
+        perVolumeNumber.value = volumeNumber.value;
+        volumeNumber.value = 0;
+      } else {
+        volumeNumber.value = perVolumeNumber.value;
+      }
+    };
+    const playIcon = computed(() => {
+      return isPlay.value ? "play-circle" : "pause-circle";
+    });
+    const volumeIcon = computed(() => {
+      let icon = "volume-mute";
+      if (isVolume.value) {
+        if (volumeNumber.value == 0) {
+          icon = "volume-off";
+        } else if (volumeNumber.value < 50) {
+          icon = "volume-down";
+        } else {
+          icon = "volume-up";
+        }
+      }
+      return icon;
+    });
     return {
       isShowMusicInfo,
+      isPlay,
+      isVolume,
+      volumeNumber,
+      perVolumeNumber,
+      playIcon,
+      volumeIcon,
       showMusicTool,
       showMusicInfo,
+      palyOrPause,
+      banOrPlayVolume,
     };
   },
 });
@@ -90,7 +142,7 @@ export default defineComponent({
     .singer {
       margin-top: 5px;
       font-size: 14px;
-      color: #999;
+      color: #808080;
     }
   }
   .option-tool {
@@ -106,6 +158,10 @@ export default defineComponent({
     li {
       margin: 5px;
       font-size: 18px;
+      cursor: pointer;
+    }
+    li:hover {
+      color: #1ed1a6;
     }
     .play {
       color: #1ed1a6;
@@ -114,6 +170,8 @@ export default defineComponent({
     .vloume,
     .music-list {
       font-size: 14px;
+      color: #878787;
+      width: 14px;
     }
   }
 }
