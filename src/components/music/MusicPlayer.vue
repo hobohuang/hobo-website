@@ -34,21 +34,38 @@
       <li class="next">
         <font-awesome-icon :icon="['fa', 'step-forward']" />
       </li>
-      <li class="music-list">
+      <li class="music-list-icon" @click="showOrhiddenList">
         <font-awesome-icon :icon="['fa', 'list']" />
       </li>
     </ul>
+    <div class="music-list" v-show="isShowMusicList">
+      <el-scrollbar>
+        <div class="list-item" v-for="item in musicList" :key="item.id">
+          <span>{{ item.song }}</span>
+          <span>-</span>
+          <span>{{ item.singer }}</span>
+        </div>
+      </el-scrollbar>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
+// todo视图切换延时
+// 样式争取和QQ音乐一样
+// 歌名或者歌手名过长省略显示。。。
+// 列表显示正在播放歌曲标记与其他相区别
 import { computed, defineComponent, ref } from "vue";
+import { musicInfoList } from "./music";
 export default defineComponent({
   name: "musicPlayer",
   setup() {
+    const musicList = ref([...musicInfoList]);
+
     let isShowMusicInfo = ref(true);
     let isPlay = ref(true);
     let isVolume = ref(true);
+    let isShowMusicList = ref(false);
     let perVolumeNumber = ref(0);
     let volumeNumber = ref(0);
 
@@ -60,6 +77,9 @@ export default defineComponent({
     };
     const palyOrPause = () => {
       isPlay.value = !isPlay.value;
+    };
+    const showOrhiddenList = () => {
+      isShowMusicList.value = !isShowMusicList.value;
     };
     const banOrPlayVolume = () => {
       isVolume.value = !isVolume.value;
@@ -87,9 +107,11 @@ export default defineComponent({
       return icon;
     });
     return {
+      musicList,
       isShowMusicInfo,
       isPlay,
       isVolume,
+      isShowMusicList,
       volumeNumber,
       perVolumeNumber,
       playIcon,
@@ -98,6 +120,7 @@ export default defineComponent({
       showMusicInfo,
       palyOrPause,
       banOrPlayVolume,
+      showOrhiddenList,
     };
   },
 });
@@ -107,12 +130,11 @@ export default defineComponent({
   position: fixed;
   top: 70px;
   left: 10px;
-  z-index: 2;
+  z-index: 10;
 
   height: 75px;
   width: 330px;
   background: #fff;
-  border-radius: 10px;
 
   box-shadow: 2px 2px 5px #ccc;
   .music-pic {
@@ -168,10 +190,36 @@ export default defineComponent({
       font-size: 28px;
     }
     .vloume,
-    .music-list {
+    .music-list-icon {
       font-size: 14px;
       color: #878787;
       width: 14px;
+    }
+  }
+  .music-list {
+    position: absolute;
+    left: 0;
+    bottom: -200px;
+    z-index: -10;
+
+    width: 330px;
+    height: 200px;
+    background: #fefefe;
+    box-shadow: 2px 2px 5px #ccc;
+
+    .list-item {
+      box-sizing: border-box;
+      height: 50px;
+      line-height: 50px;
+      padding: 0 10px;
+      font-size: 14px;
+      cursor: pointer;
+      span {
+        margin: 0 5px;
+      }
+    }
+    .list-item:hover {
+      color: #1ed1a6;
     }
   }
 }
