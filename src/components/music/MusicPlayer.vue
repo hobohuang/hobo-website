@@ -7,8 +7,8 @@
   >
     <img src="../../assets/headPic.png" class="music-pic" />
     <div class="music-info" v-show="isShowMusicInfo">
-      <span class="song">歌曲名</span>
-      <span class="singer">演唱者</span>
+      <span class="song">{{ curMusic.song }}</span>
+      <span class="singer">{{ curMusic.singer }}</span>
     </div>
     <ul class="option-tool" v-show="!isShowMusicInfo">
       <li class="vloume" @click="banOrPlayVolume">
@@ -25,13 +25,13 @@
           <el-slider v-model="volumeNumber" :disabled="!isVolume"></el-slider>
         </el-popover>
       </li>
-      <li class="last">
+      <li class="last" @click="getLast">
         <font-awesome-icon :icon="['fa', 'step-backward']" />
       </li>
       <li class="play" @click="palyOrPause">
         <font-awesome-icon :icon="['fa', playIcon]" />
       </li>
-      <li class="next">
+      <li class="next" @click="getNext">
         <font-awesome-icon :icon="['fa', 'step-forward']" />
       </li>
       <li class="music-list-icon" @click="showOrhiddenList">
@@ -55,19 +55,21 @@
 // 样式争取和QQ音乐一样
 // 歌名或者歌手名过长省略显示。。。
 // 列表显示正在播放歌曲标记与其他相区别
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import { musicInfoList } from "./music";
 export default defineComponent({
   name: "musicPlayer",
   setup() {
     const musicList = ref([...musicInfoList]);
+    const musicPlayer = new Audio();
+    const curMusicID = ref(0);
 
     let isShowMusicInfo = ref(true);
     let isPlay = ref(true);
     let isVolume = ref(true);
     let isShowMusicList = ref(false);
     let perVolumeNumber = ref(0);
-    let volumeNumber = ref(0);
+    let volumeNumber = ref(100);
 
     const showMusicTool = () => {
       isShowMusicInfo.value = false;
@@ -77,6 +79,11 @@ export default defineComponent({
     };
     const palyOrPause = () => {
       isPlay.value = !isPlay.value;
+      if (!isPlay.value) {
+        musicPlayer.play();
+      } else {
+        musicPlayer.pause();
+      }
     };
     const showOrhiddenList = () => {
       isShowMusicList.value = !isShowMusicList.value;
@@ -106,6 +113,41 @@ export default defineComponent({
       }
       return icon;
     });
+    let curMusic = ref({
+      id: 0,
+      image: "",
+      audio: "",
+      song: "",
+      album: "",
+      singer: "",
+    });
+    watch(curMusicID, (count: number) => {
+      console.log("------------------");
+      console.log(count);
+      curMusic.value = musicList.value.filter(item => item.id === count)[0];
+      musicPlayer.src = curMusic.value.audio;
+      musicPlayer.play();
+      console.log(curMusic);
+    });
+    curMusic.value = musicList.value.filter(
+      item => item.id === curMusicID.value
+    )[0];
+    musicPlayer.src = curMusic.value.audio;
+
+    const getLast = () => {
+      if (curMusicID.value === 0) {
+        curMusicID.value = musicList.value.length - 1;
+      } else {
+        curMusicID.value--;
+      }
+    };
+    const getNext = () => {
+      if (curMusicID.value === musicList.value.length - 1) {
+        curMusicID.value = 0;
+      } else {
+        curMusicID.value++;
+      }
+    };
     return {
       musicList,
       isShowMusicInfo,
@@ -114,6 +156,9 @@ export default defineComponent({
       isShowMusicList,
       volumeNumber,
       perVolumeNumber,
+      musicPlayer,
+      curMusicID,
+      curMusic,
       playIcon,
       volumeIcon,
       showMusicTool,
@@ -121,6 +166,8 @@ export default defineComponent({
       palyOrPause,
       banOrPlayVolume,
       showOrhiddenList,
+      getLast,
+      getNext,
     };
   },
 });
