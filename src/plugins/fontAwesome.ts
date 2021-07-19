@@ -1,8 +1,25 @@
 //引入图标库
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faUserSecret, faAd, faBlog, faEye, faHeart, faCommentDots, faChevronDown, faVolumeDown, faVolumeMute, faVolumeOff, faVolumeUp, faStepForward, faStepBackward, faPlayCircle, faPauseCircle, faList } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUserSecret,
+  faAd,
+  faBlog,
+  faEye,
+  faHeart,
+  faCommentDots,
+  faChevronDown,
+  faVolumeDown,
+  faVolumeMute,
+  faVolumeOff,
+  faVolumeUp,
+  faStepForward,
+  faStepBackward,
+  faPlayCircle,
+  faPauseCircle,
+  faList,
+} from "@fortawesome/free-solid-svg-icons";
 // import {  } from '@fortawesome/free-brands-svg-icons'
-import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const components = [
@@ -22,7 +39,7 @@ const components = [
   faPlayCircle,
   faPauseCircle,
   faList,
-  farHeart
+  farHeart,
 ];
 
 components.forEach((item) => {
