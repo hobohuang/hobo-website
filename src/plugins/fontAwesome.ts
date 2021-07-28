@@ -17,6 +17,7 @@ import {
   faPlayCircle,
   faPauseCircle,
   faList,
+  faHeadphones,
 } from "@fortawesome/free-solid-svg-icons";
 // import {  } from '@fortawesome/free-brands-svg-icons'
 import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
@@ -40,6 +41,7 @@ const components = [
   faPauseCircle,
   faList,
   farHeart,
+  faHeadphones
 ];
 
 components.forEach((item) => {

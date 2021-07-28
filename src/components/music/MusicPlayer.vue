@@ -6,11 +6,11 @@
     @mouseleave="showMusicInfo"
   >
     <img src="../../assets/headPic.png" class="music-pic" />
-    <div class="music-info" v-show="isShowMusicInfo">
+    <div class="music-info" v-show="showInfoOrTool">
       <span class="song">{{ curMusic.song }}</span>
       <span class="singer">{{ curMusic.singer }}</span>
     </div>
-    <ul class="option-tool" v-show="!isShowMusicInfo">
+    <ul class="option-tool" v-show="!showInfoOrTool">
       <li class="vloume" @click="banOrPlayVolume">
         <el-popover
           placement="bottom"
@@ -18,11 +18,17 @@
           :offset="30"
           :hide-after="500"
           trigger="hover"
+          @show="isPreventShowInfo = true"
+          @hide="isPreventShowInfo = false"
         >
           <template #reference>
             <font-awesome-icon :icon="['fa', volumeIcon]" />
           </template>
-          <el-slider v-model="volumeNumber" :disabled="!isVolume"></el-slider>
+          <el-slider
+            v-model="volumeNumber"
+            :disabled="!isVolume"
+            @input="changeVolume"
+          ></el-slider>
         </el-popover>
       </li>
       <li class="last" @click="getLast">
@@ -40,10 +46,20 @@
     </ul>
     <div class="music-list" v-show="isShowMusicList">
       <el-scrollbar>
-        <div class="list-item" v-for="item in musicList" :key="item.id">
+        <div
+          class="list-item"
+          v-for="item in musicList"
+          :key="item.id"
+          :class="{ curmusic: item.id === curMusicID }"
+          @dblclick="changeCurMsuicID(item.id)"
+        >
           <span>{{ item.song }}</span>
           <span>-</span>
           <span>{{ item.singer }}</span>
+          <span v-show="item.id === curMusicID">
+            <font-awesome-icon :icon="['fa', 'headphones']" />
+          </span>
+          <!-- <i>icon</i> -->
         </div>
       </el-scrollbar>
     </div>
@@ -55,6 +71,9 @@
 // 样式争取和QQ音乐一样
 // 歌名或者歌手名过长省略显示。。。
 // 列表显示正在播放歌曲标记与其他相区别
+// 单独封装play和pause包括图标变化一起封装
+// 对volume 数值更改后存到localstorge
+// isplay逻辑反了
 import { computed, defineComponent, ref, watch } from "vue";
 import { musicInfoList } from "./music";
 export default defineComponent({
@@ -65,6 +84,7 @@ export default defineComponent({
     const curMusicID = ref(0);
 
     let isShowMusicInfo = ref(true);
+    let isPreventShowInfo = ref(false);
     let isPlay = ref(true);
     let isVolume = ref(true);
     let isShowMusicList = ref(false);
@@ -113,6 +133,13 @@ export default defineComponent({
       }
       return icon;
     });
+    const showInfoOrTool = computed(() => {
+      if (isShowMusicInfo.value && !isPreventShowInfo.value) {
+        return true;
+      } else {
+        return false;
+      }
+    });
     let curMusic = ref({
       id: 0,
       image: "",
@@ -122,15 +149,15 @@ export default defineComponent({
       singer: "",
     });
     watch(curMusicID, (count: number) => {
-      console.log("------------------");
-      console.log(count);
-      curMusic.value = musicList.value.filter(item => item.id === count)[0];
+      curMusic.value = musicList.value.filter((item) => item.id === count)[0];
       musicPlayer.src = curMusic.value.audio;
-      musicPlayer.play();
-      console.log(curMusic);
+
+      if (!isPlay.value) {
+        musicPlayer.play();
+      }
     });
     curMusic.value = musicList.value.filter(
-      item => item.id === curMusicID.value
+      (item) => item.id === curMusicID.value
     )[0];
     musicPlayer.src = curMusic.value.audio;
 
@@ -148,9 +175,21 @@ export default defineComponent({
         curMusicID.value++;
       }
     };
+    musicPlayer.onended = () => {
+      console.log("一首歌结束");
+      getNext();
+    };
+    const changeVolume = () => {
+      musicPlayer.volume = volumeNumber.value / 100;
+    };
+    const changeCurMsuicID = (id: number) => {
+      isPlay.value = false;
+      curMusicID.value = id;
+    };
     return {
       musicList,
       isShowMusicInfo,
+      isPreventShowInfo,
       isPlay,
       isVolume,
       isShowMusicList,
@@ -161,6 +200,7 @@ export default defineComponent({
       curMusic,
       playIcon,
       volumeIcon,
+      showInfoOrTool,
       showMusicTool,
       showMusicInfo,
       palyOrPause,
@@ -168,6 +208,8 @@ export default defineComponent({
       showOrhiddenList,
       getLast,
       getNext,
+      changeVolume,
+      changeCurMsuicID,
     };
   },
 });
@@ -266,6 +308,9 @@ export default defineComponent({
       }
     }
     .list-item:hover {
+      color: #1ed1a6;
+    }
+    .curmusic {
       color: #1ed1a6;
     }
   }
