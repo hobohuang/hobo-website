@@ -75,7 +75,7 @@
 // 对volume 数值更改后存到localstorge
 // isplay逻辑反了
 import { computed, defineComponent, ref, watch } from "vue";
-import { musicInfoList } from "./music";
+import { musicInfoList } from "@/constant/music";
 export default defineComponent({
   name: "musicPlayer",
   setup() {
