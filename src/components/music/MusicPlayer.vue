@@ -31,13 +31,13 @@
           ></el-slider>
         </el-popover>
       </li>
-      <li class="last" @click="getLast">
+      <li class="last" @click="switchMusic(-1)">
         <font-awesome-icon :icon="['fa', 'step-backward']" />
       </li>
       <li class="play" @click="palyOrPause">
         <font-awesome-icon :icon="['fa', playIcon]" />
       </li>
-      <li class="next" @click="getNext">
+      <li class="next" @click="switchMusic(1)">
         <font-awesome-icon :icon="['fa', 'step-forward']" />
       </li>
       <li class="music-list-icon" @click="showOrhiddenList">
@@ -74,18 +74,25 @@
 // 单独封装play和pause包括图标变化一起封装
 // 对volume 数值更改后存到localstorge
 // isplay逻辑反了
-import { computed, defineComponent, ref, watch } from "vue";
-import { musicInfoList } from "@/constant/music";
+import { computed, defineComponent, ref } from "vue";
+import { musicController } from "@/hooks/components/musicPlay";
 export default defineComponent({
   name: "musicPlayer",
   setup() {
-    const musicList = ref([...musicInfoList]);
-    const musicPlayer = new Audio();
-    const curMusicID = ref(0);
+    const {
+      curMusicID,
+      isPlay,
+      musicList,
+      curMusic,
+      musicPlay,
+      musicPause,
+      upDataMusicSrc,
+      switchMusic,
+    } = musicController();
 
     let isShowMusicInfo = ref(true);
     let isPreventShowInfo = ref(false);
-    let isPlay = ref(true);
+    // let isPlay = ref(true);
     let isVolume = ref(true);
     let isShowMusicList = ref(false);
     let perVolumeNumber = ref(0);
@@ -97,12 +104,12 @@ export default defineComponent({
     const showMusicInfo = () => {
       isShowMusicInfo.value = true;
     };
+    // !
     const palyOrPause = () => {
-      isPlay.value = !isPlay.value;
-      if (!isPlay.value) {
-        musicPlayer.play();
+      if (isPlay.value) {
+        musicPause();
       } else {
-        musicPlayer.pause();
+        musicPlay();
       }
     };
     const showOrhiddenList = () => {
@@ -118,7 +125,7 @@ export default defineComponent({
       }
     };
     const playIcon = computed(() => {
-      return isPlay.value ? "play-circle" : "pause-circle";
+      return isPlay.value ? "pause-circle" : "play-circle";
     });
     const volumeIcon = computed(() => {
       let icon = "volume-mute";
@@ -140,52 +147,13 @@ export default defineComponent({
         return false;
       }
     });
-    let curMusic = ref({
-      id: 0,
-      image: "",
-      audio: "",
-      song: "",
-      album: "",
-      singer: "",
-    });
-    watch(curMusicID, (count: number) => {
-      curMusic.value = musicList.value.filter((item) => item.id === count)[0];
-      musicPlayer.src = curMusic.value.audio;
-
-      if (!isPlay.value) {
-        musicPlayer.play();
-      }
-    });
-    curMusic.value = musicList.value.filter(
-      (item) => item.id === curMusicID.value
-    )[0];
-    musicPlayer.src = curMusic.value.audio;
-
-    const getLast = () => {
-      if (curMusicID.value === 0) {
-        curMusicID.value = musicList.value.length - 1;
-      } else {
-        curMusicID.value--;
-      }
-    };
-    const getNext = () => {
-      if (curMusicID.value === musicList.value.length - 1) {
-        curMusicID.value = 0;
-      } else {
-        curMusicID.value++;
-      }
-    };
-    musicPlayer.onended = () => {
-      console.log("一首歌结束");
-      getNext();
-    };
-    const changeVolume = () => {
-      musicPlayer.volume = volumeNumber.value / 100;
-    };
-    const changeCurMsuicID = (id: number) => {
-      isPlay.value = false;
-      curMusicID.value = id;
-    };
+    // const changeVolume = () => {
+    //   musicPlayer.volume = volumeNumber.value / 100;
+    // };
+    // const changeCurMsuicID = (id: number) => {
+    //   isPlay.value = false;
+    //   curMusicID.value = id;
+    // };
     return {
       musicList,
       isShowMusicInfo,
@@ -195,7 +163,6 @@ export default defineComponent({
       isShowMusicList,
       volumeNumber,
       perVolumeNumber,
-      musicPlayer,
       curMusicID,
       curMusic,
       playIcon,
@@ -206,10 +173,14 @@ export default defineComponent({
       palyOrPause,
       banOrPlayVolume,
       showOrhiddenList,
-      getLast,
-      getNext,
-      changeVolume,
-      changeCurMsuicID,
+      // getLast,
+      // getNext,
+      // changeVolume,
+      // changeCurMsuicID,
+      musicPlay,
+      musicPause,
+      upDataMusicSrc,
+      switchMusic,
     };
   },
 });
