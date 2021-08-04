@@ -67,102 +67,43 @@
 </template>
 
 <script lang="ts">
-// todo视图切换延时
-// 样式争取和QQ音乐一样
 // 歌名或者歌手名过长省略显示。。。
-// 列表显示正在播放歌曲标记与其他相区别
-// 单独封装play和pause包括图标变化一起封装
+// 打开音乐列表自动定位到正在播放的歌曲的位置
 // 对volume 数值更改后存到localstorge
-// isplay逻辑反了
-import { computed, defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import { musicController } from "@/hooks/components/musicPlay";
 export default defineComponent({
   name: "musicPlayer",
   setup() {
     const {
       curMusicID,
-      isPlay,
       musicList,
       curMusic,
-      musicPlay,
-      musicPause,
+      volumeNumber,
+      showInfoOrTool,
+      playIcon,
+      volumeIcon,
+      isPlay,
+      isVolume,
+      isPreventShowInfo,
+      isShowMusicList,
+      palyOrPause,
       upDataMusicSrc,
       switchMusic,
+      banOrPlayVolume,
+      changeVolume,
+      changeCurMsuicID,
+      showMusicTool,
+      showMusicInfo,
+      showOrhiddenList,
     } = musicController();
-
-    let isShowMusicInfo = ref(true);
-    let isPreventShowInfo = ref(false);
-    // let isPlay = ref(true);
-    let isVolume = ref(true);
-    let isShowMusicList = ref(false);
-    let perVolumeNumber = ref(0);
-    let volumeNumber = ref(100);
-
-    const showMusicTool = () => {
-      isShowMusicInfo.value = false;
-    };
-    const showMusicInfo = () => {
-      isShowMusicInfo.value = true;
-    };
-    // !
-    const palyOrPause = () => {
-      if (isPlay.value) {
-        musicPause();
-      } else {
-        musicPlay();
-      }
-    };
-    const showOrhiddenList = () => {
-      isShowMusicList.value = !isShowMusicList.value;
-    };
-    const banOrPlayVolume = () => {
-      isVolume.value = !isVolume.value;
-      if (!isVolume.value) {
-        perVolumeNumber.value = volumeNumber.value;
-        volumeNumber.value = 0;
-      } else {
-        volumeNumber.value = perVolumeNumber.value;
-      }
-    };
-    const playIcon = computed(() => {
-      return isPlay.value ? "pause-circle" : "play-circle";
-    });
-    const volumeIcon = computed(() => {
-      let icon = "volume-mute";
-      if (isVolume.value) {
-        if (volumeNumber.value == 0) {
-          icon = "volume-off";
-        } else if (volumeNumber.value < 50) {
-          icon = "volume-down";
-        } else {
-          icon = "volume-up";
-        }
-      }
-      return icon;
-    });
-    const showInfoOrTool = computed(() => {
-      if (isShowMusicInfo.value && !isPreventShowInfo.value) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-    // const changeVolume = () => {
-    //   musicPlayer.volume = volumeNumber.value / 100;
-    // };
-    // const changeCurMsuicID = (id: number) => {
-    //   isPlay.value = false;
-    //   curMusicID.value = id;
-    // };
     return {
       musicList,
-      isShowMusicInfo,
       isPreventShowInfo,
       isPlay,
       isVolume,
       isShowMusicList,
       volumeNumber,
-      perVolumeNumber,
       curMusicID,
       curMusic,
       playIcon,
@@ -173,12 +114,8 @@ export default defineComponent({
       palyOrPause,
       banOrPlayVolume,
       showOrhiddenList,
-      // getLast,
-      // getNext,
-      // changeVolume,
-      // changeCurMsuicID,
-      musicPlay,
-      musicPause,
+      changeVolume,
+      changeCurMsuicID,
       upDataMusicSrc,
       switchMusic,
     };
