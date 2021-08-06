@@ -2,7 +2,6 @@
   <div class="app">
     <top-nav />
     <music-player />
-    <!-- <audio src="/music/GAI周延,大痒痒 - 哪吒.mp3" controls></audio> -->
     <router-view />
   </div>
 </template>

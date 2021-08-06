@@ -126,7 +126,7 @@ export default defineComponent({
 .music-player {
   position: fixed;
   top: 70px;
-  left: 10px;
+  left: 5px;
   z-index: 10;
 
   height: 75px;
