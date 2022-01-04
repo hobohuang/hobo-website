@@ -1,0 +1,2 @@
+// export const SET_TODO = "SET_TODO";
+export const MODIFY_ISSHOWPLAYER = "MODIFY_ISSHOWPLAYER";

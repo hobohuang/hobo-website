@@ -2,58 +2,60 @@ import { computed, defineComponent, onBeforeMount, ref, watch } from "vue";
 import { musicInfoList } from "@/constant/music";
 
 interface ICurMusic {
-  id:number, 
-  image: string,
-  audio: string,
-  song: string,
-  album: string,
-  singer: string,
+  id: number;
+  image: string;
+  audio: string;
+  song: string;
+  album: string;
+  singer: string;
 }
 //音乐播放器控制
 function musicController() {
   /*
    * 音乐播放器基本功能控制
    */
-  const musicPlayer:HTMLAudioElement = new Audio();
-  const isPlay = ref<boolean>(false);//音乐播放暂停的标志，true为播放，false为停止
-  const curMusicID = ref(0);//当前音乐ID
-  const musicList = ref([...musicInfoList]);//音乐信息列表
-  const curMusic = ref<ICurMusic>();// 当前音乐信息
+  const musicPlayer: HTMLAudioElement = new Audio();
+  const isPlay = ref<boolean>(false); //音乐播放暂停的标志，true为播放，false为停止
+  const curMusicID = ref(0); //当前音乐ID
+  const musicList = ref([...musicInfoList]); //音乐信息列表
+  const curMusic = ref<ICurMusic>(); // 当前音乐信息
   // 初始化音乐信息列表
   onBeforeMount(() => {
     curMusic.value = musicList.value.filter(
-    (item) => item.id === curMusicID.value
-  )[0];
-  musicPlayer.src = curMusic.value.audio;
-  })
+      (item) => item.id === curMusicID.value
+    )[0];
+    musicPlayer.src = curMusic.value.audio;
+  });
   // 音乐播放
   const musicPlay = () => {
-      isPlay.value = true;
-      musicPlayer.play();
-  }
+    isPlay.value = true;
+    musicPlayer.play();
+  };
   // 音乐暂停
   const musicPause = () => {
-      isPlay.value = false;
-      musicPlayer.pause();
-  }
+    isPlay.value = false;
+    musicPlayer.pause();
+  };
   // 音乐播放器控制事件(播放或者暂停)
   const palyOrPause = () => {
-      if (isPlay.value) {
-        musicPause();
-      } else {
-        musicPlay();
-      }
-    };
+    if (isPlay.value) {
+      musicPause();
+    } else {
+      musicPlay();
+    }
+  };
   //更新音乐链接地址
   const upDataMusicSrc = (src: string) => {
     musicPlayer.src = src;
-  }
+  };
   // 切换歌曲 mode = -1为上一曲,mode = 1 为下一曲
-  const switchMusic = (mode: number)=>{
-    curMusicID.value = (curMusicID.value + musicList.value.length + mode) % musicList.value.length;
+  const switchMusic = (mode: number) => {
+    curMusicID.value =
+      (curMusicID.value + musicList.value.length + mode) %
+      musicList.value.length;
     console.log("切歌");
-  }
-  //列表切歌事件 
+  };
+  //列表切歌事件
   const changeCurMsuicID = (id: number) => {
     curMusicID.value = id;
   };
@@ -62,9 +64,9 @@ function musicController() {
    * 音量相关控制
    */
 
-  const isVolume = ref<boolean>(true);//是否静音标志，true为不静音，false为静音。
-  const volumeNumber = ref<number>(100);//音量
-  const perVolumeNumber = ref<number>(0);//记录上次静音前音量
+  const isVolume = ref<boolean>(true); //是否静音标志，true为不静音，false为静音。
+  const volumeNumber = ref<number>(100); //音量
+  const perVolumeNumber = ref<number>(0); //记录上次静音前音量
   //静音或者取消静音事件
   const banOrPlayVolume = () => {
     isVolume.value = !isVolume.value;
@@ -77,15 +79,15 @@ function musicController() {
   };
   //更改音量事件
   const changeVolume = () => {
-  musicPlayer.volume = volumeNumber.value / 100;
+    musicPlayer.volume = volumeNumber.value / 100;
   };
-  
+
   /*
    *视图相关控制
    */
-  const isShowMusicInfo = ref(true);//显示音乐信息标志位
-  const isPreventShowInfo = ref(false);//阻止显示音乐信息标志位，为防止其他事件需要阻止音乐信息显示保留的标志位
-  const isShowMusicList = ref(false);//显示音乐列表标志位
+  const isShowMusicInfo = ref(true); //显示音乐信息标志位
+  const isPreventShowInfo = ref(false); //阻止显示音乐信息标志位，为防止其他事件需要阻止音乐信息显示保留的标志位
+  const isShowMusicList = ref(false); //显示音乐列表标志位
   //显示工具栏控制事件
   const showMusicTool = () => {
     isShowMusicInfo.value = false;
@@ -159,8 +161,8 @@ function musicController() {
     changeCurMsuicID,
     showMusicTool,
     showMusicInfo,
-    showOrhiddenList
-  }
+    showOrhiddenList,
+  };
 }
 
-export {musicController}
+export { musicController };

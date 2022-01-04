@@ -1,7 +1,7 @@
 const musicInfoList = [
   {
     id: 0,
-    image:"",
+    image: "",
     audio: "/music/song_0.mp3",
     song: "哪吒",
     album: "",
@@ -9,7 +9,7 @@ const musicInfoList = [
   },
   {
     id: 1,
-    image:"",
+    image: "",
     audio: "/music/song_1.mp3",
     song: "那盏茶",
     album: "",
@@ -17,7 +17,7 @@ const musicInfoList = [
   },
   {
     id: 2,
-    image:"",
+    image: "",
     audio: "/music/song_2.mp3",
     song: "明月天涯",
     album: "",
@@ -25,7 +25,7 @@ const musicInfoList = [
   },
   {
     id: 3,
-    image:"",
+    image: "",
     audio: "/music/song_3.mp3",
     song: "梅雨声",
     album: "",
@@ -33,7 +33,7 @@ const musicInfoList = [
   },
   {
     id: 4,
-    image:"",
+    image: "",
     audio: "/music/song_4.mp3",
     song: "栖凰",
     album: "",
@@ -41,7 +41,7 @@ const musicInfoList = [
   },
   {
     id: 5,
-    image:"",
+    image: "",
     audio: "/music/song_5.mp3",
     song: "齐天(Cover:大冢爱)",
     album: "",
@@ -49,7 +49,7 @@ const musicInfoList = [
   },
   {
     id: 6,
-    image:"",
+    image: "",
     audio: "/music/song_6.mp3",
     song: "木兰行",
     album: "",
@@ -57,7 +57,7 @@ const musicInfoList = [
   },
   {
     id: 7,
-    image:"",
+    image: "",
     audio: "/music/song_7.mp3",
     song: "哪吒",
     album: "",
@@ -65,7 +65,7 @@ const musicInfoList = [
   },
   {
     id: 8,
-    image:"",
+    image: "",
     audio: "/music/song_8.mp3",
     song: "千梦[with.Aki阿杰]",
     album: "",

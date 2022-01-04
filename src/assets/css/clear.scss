@@ -77,6 +77,12 @@ textarea {
   resize: none;
   overflow: auto;
 }
+button {
+  background: #fff;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
 
 //更改card的padding
 .el-card__body {
