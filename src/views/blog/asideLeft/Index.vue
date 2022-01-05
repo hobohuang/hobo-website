@@ -6,6 +6,7 @@
       mode="vertical"
       @select="handleSelect"
     >
+      <el-menu-item index="0">全部</el-menu-item>
       <el-menu-item index="1">说说</el-menu-item>
       <el-submenu index="2">
         <template #title>文章</template>
@@ -28,14 +29,12 @@ import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "BlogAsideLeft",
   setup() {
-    const activeIndex = ref("1");
-    const activeIndex2 = ref("1");
+    const activeIndex = ref("0");
     const handleSelect = (key: string, keyPath: string[]) => {
       console.log(key, keyPath);
     };
     return {
       activeIndex,
-      activeIndex2,
       handleSelect,
     };
   },

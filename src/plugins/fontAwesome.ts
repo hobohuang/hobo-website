@@ -19,9 +19,15 @@ import {
   faList,
   faHeadphones,
   faCompactDisc,
+  faClock,
+  faMapMarkerAlt,
 } from "@fortawesome/free-solid-svg-icons";
 // import {  } from '@fortawesome/free-brands-svg-icons'
-import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
+import {
+  faHeart as farHeart,
+  faGrin as farGin,
+  faImage as farImage,
+} from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const components = [
@@ -44,6 +50,10 @@ const components = [
   farHeart,
   faHeadphones,
   faCompactDisc,
+  farGin,
+  farImage,
+  faClock,
+  faMapMarkerAlt,
 ];
 
 components.forEach((item) => {
